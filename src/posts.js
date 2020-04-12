@@ -25,6 +25,10 @@ const PostFilter = (props) => (
   </Filter>
 );
 
+const PostPanel = ({ id, record, resource }) => (
+  <div dangerouslySetInnerHTML={{ __html: record.body }} />
+);
+
 export const PostList = (props) => {
   const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   return (
@@ -38,7 +42,7 @@ export const PostList = (props) => {
           }
         />
       ) : (
-        <Datagrid>
+        <Datagrid expand={<PostPanel />}>
           <TextField source="id" />
           <ReferenceField source="userId" reference="users">
             <TextField source="name" />
